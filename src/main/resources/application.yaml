@@ -1,6 +1,8 @@
 server:
   port: 8080
-  error.include-stacktrace: never
+  error:
+    include-stacktrace: never
+    include-message: always
 
 spring.neo4j:
   uri: neo4j+s://86d326ce.databases.neo4j.io

@@ -3,6 +3,8 @@ package com.nextzakir.springdataneo4jrestapi.node;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
+import org.springframework.lang.Nullable;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
@@ -23,6 +25,14 @@ public class Person {
     @NotNull
     private String personName;
 
+    @Nullable
+    @Relationship(type = "KNOWS", direction = Relationship.Direction.INCOMING)
+    private Person knownPerson;
+
+    @Nullable
+    @Relationship(type = "TEAM_MATE", direction = Relationship.Direction.INCOMING)
+    private Person teamMate;
+
     @NotNull
     private Date createdAt;
 
@@ -32,10 +42,19 @@ public class Person {
     public Person() {
     }
 
-    public Person(Long id, Long personId, String personName, Date createdAt, Date updatedAt) {
+    public Person(Long personId, String personName, Date createdAt, Date updatedAt) {
+        this.personId = personId;
+        this.personName = personName;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Person(Long id, Long personId, String personName, @Nullable Person knownPerson, @Nullable Person teamMate, Date createdAt, Date updatedAt) {
         this.id = id;
         this.personId = personId;
         this.personName = personName;
+        this.knownPerson = knownPerson;
+        this.teamMate = teamMate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -62,6 +81,24 @@ public class Person {
 
     public void setPersonName(String personName) {
         this.personName = personName;
+    }
+
+    @Nullable
+    public Person getKnownPerson() {
+        return knownPerson;
+    }
+
+    public void setKnownPerson(@Nullable Person knownPerson) {
+        this.knownPerson = knownPerson;
+    }
+
+    @Nullable
+    public Person getTeamMate() {
+        return teamMate;
+    }
+
+    public void setTeamMate(@Nullable Person teamMate) {
+        this.teamMate = teamMate;
     }
 
     public Date getCreatedAt() {
@@ -99,6 +136,8 @@ public class Person {
                 "id=" + id +
                 ", personId=" + personId +
                 ", personName='" + personName + '\'' +
+                ", knownPerson=" + knownPerson +
+                ", teamMate=" + teamMate +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

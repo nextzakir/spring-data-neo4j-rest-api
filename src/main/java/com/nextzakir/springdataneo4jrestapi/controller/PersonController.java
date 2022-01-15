@@ -1,5 +1,6 @@
 package com.nextzakir.springdataneo4jrestapi.controller;
 
+import com.nextzakir.springdataneo4jrestapi.exception.InternalServerErrorException;
 import com.nextzakir.springdataneo4jrestapi.repository.PersonRepository;
 import com.nextzakir.springdataneo4jrestapi.node.Person;
 import org.slf4j.Logger;
@@ -34,7 +35,14 @@ public class PersonController {
         person.setCreatedAt(new Date(Calendar.getInstance().getTimeInMillis()));
         person.setUpdatedAt(new Date(Calendar.getInstance().getTimeInMillis()));
 
-        return new ResponseEntity<>(personRepository.save(person), HttpStatus.CREATED);
+        try {
+            person = personRepository.save(person);
+        } catch (Exception e) {
+            logger.error("Error in saving person information. ERROR: " + e.getMessage());
+            throw new InternalServerErrorException("Something went wrong on the server!");
+        }
+
+        return new ResponseEntity<>(person, HttpStatus.CREATED);
 
     }
 
