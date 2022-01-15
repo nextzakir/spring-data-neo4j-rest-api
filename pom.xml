@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.nextzakir</groupId>
-	<artifactId>spring-data-neo4j-rest-api</artifactId>
+	<artifactId>spring-data-neo4j-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-data-neo4j-rest-api</name>
+	<name>spring-data-neo4j-api</name>
 	<description>A REST API using Spring Boot and Spring Data Neo4j.</description>
 	<properties>
 		<java.version>11</java.version>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.5.12</version>
+			<version>1.6.3</version>
 		</dependency>
 		<!-- The End -->
 
