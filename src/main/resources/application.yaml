@@ -7,7 +7,7 @@ server:
 spring:
   mvc.pathmatch.matching-strategy: ant_path_matcher
   neo4j:
-    uri: neo4j+s://86d326ce.databases.neo4j.io
+    uri:
     authentication:
-      username: neo4j
-      password: xg3WKzsTOn40UaF4Sm-BgC85UW8x1OteLff-kekcU3s
+      username:
+      password:
